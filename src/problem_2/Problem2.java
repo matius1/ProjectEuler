@@ -13,29 +13,21 @@ public class Problem2 {
      */
 
     public static void main(String[] args) {
-
-        List<Integer> list;
-        list = fibonacci(4000000);
-
+        List<Integer> list = fibonacci(4000000);
         int result = list.stream().mapToInt(n -> n).filter(n -> n % 2 == 0).sum();
-
         System.out.println(result);
     }
 
     private static List<Integer> fibonacci(int maxValue) {
-
         List<Integer> list = new ArrayList<>();
-        int j = 1;
         list.add(0);
 
-        while (list.get(list.size() - 1) <= maxValue) {
+        int j = 1;
+        while (list.get(list.size() - 1) <= maxValue || ((list.get(j - 1) + list.get(j - 2)) >= maxValue)) {
             if (j == 1 || j == 2) {
                 list.add(1);
             } else {
-                int tmp = list.get(j - 1) + list.get(j - 2);
-                if (tmp >= maxValue)
-                    break;
-                list.add(tmp);
+                list.add(list.get(j - 1) + list.get(j - 2));
             }
             j++;
         }
